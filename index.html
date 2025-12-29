@@ -3,72 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Awesome Website</title>
+    <title>AK Space - Price Dashboard & Reel Generator</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Google AdSense Code (Add this after approval) -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"
-        crossorigin="anonymous"></script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Website</h1>
-        <p>Quality content for Google AdSense monetization</p>
+    <!-- Header Banner Ad -->
+    <div class="ad-space ad-header">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_PUBLISHER_ID" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <h1>🚀 AK Space</h1>
+            <p class="tagline">Your Smart Dashboard & Content Generator</p>
+        </div>
     </header>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="blog.html">Blog</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li><a href="#home" onclick="showSection('home')">Home</a></li>
+            <li><a href="#dashboard" onclick="showSection('dashboard')">Price Dashboard</a></li>
+            <li><a href="#reel-generator" onclick="showSection('reel-generator')">Reel Generator</a></li>
+            <li><a href="#about" onclick="showSection('about')">About</a></li>
+        </ul>
     </nav>
 
-    <main>
-        <article>
-            <h2>Article Title 1</h2>
-            <p class="meta">Published on January 1, 2025</p>
-            <p>This is a sample article. Your website needs original, quality content for Google AdSense approval. Write about topics you're knowledgeable about. This is essential content that demonstrates expertise in your chosen niche.</p>
-            <p>Write at least 300-500 words of unique content per page. Google AdSense looks for sites with substantial, original content that provides value to readers. Quality over quantity is important.</p>
+    <main class="container">
+        <!-- Home Section -->
+        <section id="home" class="section">
+            <div class="hero">
+                <h2>Welcome to AK Space</h2>
+                <p>Discover real-time commodity prices and create stunning Instagram reels with AI-powered captions!</p>
+                <div class="cta-buttons">
+                    <button onclick="showSection('dashboard')" class="btn btn-primary">View Price Dashboard</button>
+                    <button onclick="showSection('reel-generator')" class="btn btn-secondary">Generate Reels</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Price Dashboard Section -->
+        <section id="dashboard" class="section hidden">
+            <h2>💎 Price Dashboard</h2>
+            <p class="section-desc">Real-time commodity prices updated regularly</p>
             
+            <div class="price-grid">
+                <div class="price-card">
+                    <div class="price-icon">🥇</div>
+                    <h3>Gold Price</h3>
+                    <div class="price-value" id="gold-price">Loading...</div>
+                    <p class="price-unit">₹/gram</p>
+                    <button onclick="refreshPrices()" class="btn-refresh">Refresh</button>
+                </div>
+
+                <div class="price-card">
+                    <div class="price-icon">🥈</div>
+                    <h3>Silver Price</h3>
+                    <div class="price-value" id="silver-price">Loading...</div>
+                    <p class="price-unit">₹/gram</p>
+                    <button onclick="refreshPrices()" class="btn-refresh">Refresh</button>
+                </div>
+
+                <div class="price-card">
+                    <div class="price-icon">💵</div>
+                    <h3>USD to INR</h3>
+                    <div class="price-value" id="usd-price">Loading...</div>
+                    <p class="price-unit">Exchange Rate</p>
+                    <button onclick="refreshPrices()" class="btn-refresh">Refresh</button>
+                </div>
+            </div>
+
             <!-- Ad Space 1 -->
-            <div class="ad-space">
-                <ins class="adsbygoogle"
-                    style="display:block"
-                    data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
-                    data-ad-slot="1234567890"
-                    data-ad-format="auto"
-                    data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+            <div class="ad-space ad-middle">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_PUBLISHER_ID" data-ad-slot="2345678901" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
             </div>
+        </section>
 
-            <p>Continue with more high-quality content here. Ensure all content is original and not copied from other sources. Google takes plagiarism very seriously.</p>
-        </article>
-
-        <article>
-            <h2>Article Title 2</h2>
-            <p class="meta">Published on December 28, 2024</p>
-            <p>Another article with unique, original content. AdSense prefers sites with multiple pages and articles. Each article should provide value and be well-researched.</p>
-            <p>Your content should be informative, helpful, and engaging. Write naturally for your audience. Avoid keyword stuffing and focus on providing genuine value.</p>
+        <!-- Instagram Reel Generator Section -->
+        <section id="reel-generator" class="section hidden">
+            <h2>📸 Instagram Reel Caption & Hashtag Generator</h2>
+            <p class="section-desc">Create engaging captions and trending hashtags instantly</p>
             
-            <!-- Ad Space 2 -->
-            <div class="ad-space">
-                <ins class="adsbygoogle"
-                    style="display:block"
-                    data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
-                    data-ad-slot="2345678901"
-                    data-ad-format="auto"
-                    data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+            <div class="generator-form">
+                <div class="form-group">
+                    <label for="topic">Topic/Description:</label>
+                    <textarea id="topic" placeholder="e.g., Morning fitness routine, Couple travel vlog..." rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="reel-type">Reel Type (Optional):</label>
+                    <select id="reel-type">
+                        <option value="general">General</option>
+                        <option value="fitness">Fitness</option>
+                        <option value="couple">Couple</option>
+                        <option value="motivation">Motivation</option>
+                        <option value="travel">Travel</option>
+                        <option value="funny">Funny</option>
+                        <option value="business">Business</option>
+                    </select>
+                </div>
+
+                <button onclick="generateCaption()" class="btn btn-primary">Generate Caption & Hashtags</button>
             </div>
-        </article>
+
+            <div id="caption-result" class="result-container hidden">
+                <div class="captions">
+                    <h3>Suggested Captions:</h3>
+                    <div id="captions-list"></div>
+                </div>
+
+                <div class="hashtags">
+                    <h3>Trending Hashtags:</h3>
+                    <div id="hashtags-list"></div>
+                </div>
+
+                <button onclick="copyToClipboard()" class="btn btn-secondary">Copy All</button>
+            </div>
+
+            <!-- Ad Space 2 -->
+            <div class="ad-space ad-middle">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_PUBLISHER_ID" data-ad-slot="3456789012" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section hidden">
+            <h2>About AK Space</h2>
+            <p>AK Space is your all-in-one platform for real-time commodity prices and social media content generation.</p>
+            <p>Built with Node.js backend and responsive frontend for optimal user experience.</p>
+        </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 My Website. All rights reserved.</p>
-        <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+    <!-- Footer Banner Ad -->
+    <div class="ad-space ad-footer">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_PUBLISHER_ID" data-ad-slot="4567890123" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 AK Space. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
