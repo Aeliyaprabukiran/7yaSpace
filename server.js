@@ -299,6 +299,42 @@ app.listen(PORT, () => {
   console.log(`  GET /api/prices/usd-inr`);
   console.log(`  GET /api/prices/all`);
   console.log(`  GET /api/health`);
+
+  // GoodReturns Chennai scraping endpoint
+app.get('/api/prices/goodreturns-chennai', async (req, res) => {
+    try {
+          const cacheKey = 'goodreturns-prices';
+    const cachedData = cache.get(cacheKey);
+    if (cachedData) {
+      return res.json(cachedData);
+    }
+
+    const response = await axios.get('https://www.goodreturns.in/gold-rates/chennai.html', {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }
+    });
+
+    const html = response.data;
+    const gold24kMatch = html.match(/₹([\d,]+).*?24K.*?Gold/is) || html.match(/24K.*?Gold.*?₹([\d,]+)/is);
+    const gold22kMatch = html.match(/₹([\d,]+).*?22K.*?Gold/is) || html.match(/22K.*?Gold.*?₹([\d,]+)/is);
+    const silverMatch = html.match(/Silver.*?₹([\d,]+)/is);
+    const usdMatch = html.match(/USD.*?₹\s*([\d.]+)/is);
+
+    const result = {
+      gold24k: { price: gold24kMatch ? parseInt(gold24kMatch[1].replace(/,/g, '')) : 14204, currency: 'INR', unit: 'per gram', city: 'Chennai', purity: '24K' },
+      gold22k: { price: gold22kMatch ? parseInt(gold22kMatch[1].replace(/,/g, '')) : 13020, currency: 'INR', unit: 'per gram', city: 'Chennai', purity: '22K' },
+      silver: { price: silverMatch ? parseInt(silverMatch[1].replace(/,/g, '')) : 258000, currency: 'INR', unit: 'per kg', city: 'Chennai' },
+      usdInr: { rate: usdMatch ? parseFloat(usdMatch[1]) : 89.92, display: `1 USD = ₹${usdMatch ? usdMatch[1] : '89.92'} INR` },
+      timestamp: new Date(),
+      source: 'goodreturns.in'
+    };
+
+    cache.set(cacheKey, result, 60);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch GoodReturns prices', details: error.message });
+  }
+});
+
 });
 
 module.exports = app;
