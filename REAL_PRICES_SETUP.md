@@ -242,3 +242,72 @@ setInterval(refreshPrices, 60 * 1000);
 ## Questions?
 
 Refer to the server.js file for detailed implementation notes.
+
+## GoodReturns Chennai Live Price Scraping
+
+### New Endpoint Added (v2.0)
+
+**Endpoint:** `/api/prices/goodreturns-chennai`
+
+**Purpose:** Scrapes live gold (22K, 24K), silver, and USD-INR exchange rates from GoodReturns.in Chennai market data.
+
+**Response Format:**
+```json
+{
+  "gold24k": {
+    "price": 14204,
+    "currency": "INR",
+    "unit": "per gram",
+    "city": "Chennai",
+    "purity": "24K"
+  },
+  "gold22k": {
+    "price": 13020,
+    "currency": "INR",
+    "unit": "per gram",
+    "city": "Chennai",
+    "purity": "22K"
+  },
+  "silver": {
+    "price": 258000,
+    "currency": "INR",
+    "unit": "per kg",
+    "city": "Chennai"
+  },
+  "usdInr": {
+    "rate": 89.92,
+    "display": "1 USD = ₹89.92 INR"
+  },
+  "timestamp": "2025-12-29T10:00:00.000Z",
+  "source": "goodreturns.in"
+}
+```
+
+### Features
+
+- **Real-time scraping** from GoodReturns.in Chennai gold rates page
+- **60-second caching** to prevent excessive requests
+- **Fallback prices** if scraping fails
+- **User-Agent header** to avoid blocking
+- **Error handling** with detailed error messages
+
+### How to Use
+
+1. Make a GET request to: `http://localhost:3000/api/prices/goodreturns-chennai`
+2. Response includes all prices in cached format
+3. Data updates every 60 seconds
+
+### Frontend Integration Example
+
+```javascript
+fetch('http://localhost:3000/api/prices/goodreturns-chennai')
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('gold24k-price').textContent = `₹${data.gold24k.price}`;
+    document.getElementById('gold22k-price').textContent = `₹${data.gold22k.price}`;
+    document.getElementById('silver-price').textContent = `₹${data.silver.price}`;
+    document.getElementById('usd-inr').textContent = data.usdInr.display;
+  })
+  .catch(err => console.error('Error fetching prices:', err));
+```
+
